@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+
+<style>
+	.line-height-fix {
+		line-height: 0;
+	}
+</style>
+
+</head>
+<body>
+<form th:action="@{/books/search}" th:method="Post">
+  <label for="searchKey">Search:</label>
+  <input type="text" id="searchKey" name="searchKey" placeholder="Search for title">
+  <button type="submit">Search</button>
+</form>
+
+
+
+	<div th:each="book : ${searchRes}">
+		<a th:href="@{/books/{id}(id=${book.getId()})}"
+			th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear()}"
+			class="line-height-fix">book</a>
+			<p th:text="${book.getOwner() != null ? 'Book is at ' + book.getOwner().getName() : 'Book is free'}"
+   class="line-height-fix"></p>
+
+	</div>
+
+	<br />
+
+	<hr />
+ 
+ 
+	<a href="/books/new">Create new book</a>
+	
+	<br>
+
+	<p>
+		<< <a href="/books"> Go to books</a>
+	</p>
+</body>
+</html>

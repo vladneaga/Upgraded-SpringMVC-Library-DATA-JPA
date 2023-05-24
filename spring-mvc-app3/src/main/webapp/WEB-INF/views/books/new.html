@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>New person</title>
+</head>
+<body>
+
+	<form th:method="POST" th:action="@{/books/new}" th:object="${book}">
+		<label for="name">Enter title: </label> <input type="text"
+			th:field="*{title}" id="title" />
+		<div style="color: red" th:if="${#fields.hasErrors('title')}"
+			th:errors="*{title}">Title Error</div>
+		<br /> <label for="author">Enter author: </label> <input type="text"
+			th:field="*{author}" id="author" />
+		<div style="color: red" th:if="${#fields.hasErrors('author')}"
+			th:errors="*{author}">Title Error</div>
+		<br /> <label for="year">Enter year: </label> <input type="text"
+			th:field="*{year}" id="year" />
+		<div style="color: red" th:if="${#fields.hasErrors('year')}"
+			th:errors="*{year}">Year Error</div>
+		<br /> <label for="book">Select owner: </label> <select
+			th:object="${book}" th:field="*{personid}" id="book">
+			<option th:each="person: ${people}" th:value="${person.getId()}"
+				th:text="${person.getName()}"></option>
+				<option th:value="1" th:text="None"></option>
+
+		</select> <br /> <input type="submit" value="Create!" />
+		
+	</form>
+	<p>
+		<< <a href="/books"> Go back to books</a>
+	</p>
+</body>
+</html>

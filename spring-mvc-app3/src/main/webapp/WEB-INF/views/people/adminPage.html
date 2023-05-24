@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add administrator</title>
+<meta charset="UTF-8">
+</head>
+<body>
+	<form th:method="POST" th:action="@{/admin/add}">
+		<label for="person">Select a person</label> <select
+			th:object="${person}" th:field="*{id}" id="person">
+			<option th:each="person: ${people}" th:value="${person.getId()}"
+				th:text="${person.getName()}"></option>
+
+		</select> <input type="submit" value="Submit admin" />
+	</form>
+
+
+
+</body>
+</html>

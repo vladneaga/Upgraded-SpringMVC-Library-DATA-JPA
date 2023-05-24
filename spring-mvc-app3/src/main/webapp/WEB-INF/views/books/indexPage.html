@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+</head>
+<body>
+
+
+<form th:action="@{/books/search}" th:method="Post">
+  <label for="searchKey">Search:</label>
+  <input type="text" id="searchKey" name="searchKey" placeholder="Search for title">
+  <button type="submit">Search</button>
+</form>
+<br>
+	<div th:each="book : ${books}">
+		<a th:href="@{/books/{id}(id=${book.getId()})}"
+			th:text="${book.getTitle() + ', ' + book.getAuthor()}">book</a>
+
+	</div>
+	<hr>
+	<br>
+	<span> <text>Page:&nbsp;&nbsp;&nbsp;&nbsp; </text>
+	<div th:each="page : ${pages}" style="display: inline-block;">
+    
+         <a th:href="@{/books/results/{page}/{itemsPerPage}(page=${page}, itemsPerPage=${itemsPerPage})}" th:text="${page+1}"></a>
+</div>
+</span>
+	<br />
+	
+	<hr />
+ 
+
+	<p>
+		<< <a href="/books"> Go to books</a>
+	</p>
+</body>
+</html>
